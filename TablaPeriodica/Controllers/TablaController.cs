@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,34 +7,37 @@ using TablaPeriodica.Models;
 
 namespace TablaPeriodica.Controllers
 {
-    public class HomeController : Controller
+    public class TablaController : Controller
     {
         public IActionResult Index()
         {
-            return View();
-        }
-       /* public IActionResult Elementos()
-        {
-            List<ElementosT> elementos = new List<ElementosT>() //{ new Elementos()
-            {
-              new ElementosT{ Name = "H 1", Clasificacion = "No Metales", Elements ="" },
-              new ElementosT {Name = "He 2", Clasificacion = "Gases Nobles", Elements ="" },
-              new ElementosT { Name = "Li 3", Clasificacion = "Alcalino", Elements ="" },
-              new ElementosT { Name = "Be 4", Clasificacion = "Alcalinoterreos", Elements ="" },
+            var elementos = GetElementosTs();
 
-              new ElementosT { Name = "B 5", Clasificacion = "Metaloide", Elements ="" },
-              new ElementosT { Name = "C 6", Clasificacion = "Otro Metales", Elements ="" },
-              new ElementosT { Name = "N 7", Clasificacion = "Otro Metales", Elements ="" },
-              new ElementosT { Name = "O 8", Clasificacion = "Alogeno", Elements ="" },
-              new ElementosT { Name = "F 9", Clasificacion = "", Elements ="" },
+            
+            return View(elementos);
+        }
+
+        private IEnumerable<ElementosT> GetElementosTs()
+        {
+            return new List<ElementosT>
+            {
+              new ElementosT{ Name = "H 1", Clasificacion = "Otros No Metales", Elements ="Hidrogeno" },
+              new ElementosT {Name = "He 2", Clasificacion = "Gases Nobles", Elements ="" },
+              new ElementosT { Name = "Li 3", Clasificacion = "Alcalinos", Elements ="" },
+              new ElementosT { Name = "Be 4", Clasificacion = "Alcalinoterreos", Elements ="" },
+              new ElementosT { Name = "B 5", Clasificacion = "Metaloides", Elements ="" },
+              new ElementosT { Name = "C 6", Clasificacion = "Otros No Metales", Elements ="" },
+              new ElementosT { Name = "N 7", Clasificacion = "Otros No Metales", Elements ="" },
+              new ElementosT { Name = "O 8", Clasificacion = "Otros No Metales", Elements ="" },
+              new ElementosT { Name = "F 9", Clasificacion = "Halogenos", Elements ="" },
               new ElementosT { Name = "Ne 10", Clasificacion = "Gases Nobles", Elements ="" },
-              new ElementosT { Name = "Na 11", Clasificacion = "Alcaloides", Elements ="" },
+              new ElementosT { Name = "Na 11", Clasificacion = "Alcalinos", Elements ="" },
               new ElementosT { Name = "Mg 12", Clasificacion = "Alcalinoterreos", Elements ="" },
-              new ElementosT { Name = "Al 13", Clasificacion = "Otros Metaltes", Elements ="" },
+              new ElementosT { Name = "AI 13", Clasificacion = "Otros Metales", Elements ="" },
               new ElementosT { Name = "Si 14", Clasificacion = "Metaloides", Elements ="" },
-              new ElementosT { Name = "P 15", Clasificacion = "Otros Metales", Elements ="" },
-              new ElementosT { Name = "S 16", Clasificacion = "Otros Metales", Elements ="" },
-              new ElementosT { Name = "Cl 17", Clasificacion = "Halogeno", Elements ="" },
+              new ElementosT { Name = "P 15", Clasificacion = "Otros No Metales", Elements ="" },
+              new ElementosT { Name = "S 16", Clasificacion = "Otros No Metales", Elements ="" },
+              new ElementosT { Name = "Cl 17", Clasificacion = "Halogenos", Elements ="" },
               new ElementosT { Name = "Ar 18", Clasificacion = "Gases Nobles", Elements ="" },
               new ElementosT { Name = "K 19", Clasificacion = "Alcalinos", Elements ="" },
               new ElementosT { Name = "Ca 20", Clasificacion = "Alcalinoterreos", Elements ="" },
@@ -52,10 +54,10 @@ namespace TablaPeriodica.Controllers
               new ElementosT { Name = "Ga 31", Clasificacion = "Otros Metales", Elements ="" },
               new ElementosT { Name = "Ge 32", Clasificacion = "Metaloides", Elements ="" },
               new ElementosT { Name = "As 33", Clasificacion = "Metaloides", Elements ="" },
-              new ElementosT { Name = "Se 34", Clasificacion = "Halogenos", Elements ="" },
+              new ElementosT { Name = "Se 34", Clasificacion = "Otros No Metales", Elements ="" },
               new ElementosT { Name = "Br 35", Clasificacion = "Gases Nobles", Elements ="" },
               new ElementosT { Name = "Kr 36", Clasificacion = "Gases NObles", Elements ="" },
-              new ElementosT { Name = "Rb 37", Clasificacion = "Alcaloides", Elements ="" },
+              new ElementosT { Name = "Rb 37", Clasificacion = "Alcalinos", Elements ="" },
               new ElementosT { Name = "Sr 38", Clasificacion = "Alcalinoterreos", Elements ="" },
               new ElementosT { Name = "Y 39", Clasificacion = "Metales de Transiccion / Bloque D", Elements ="" },
               new ElementosT { Name = "Zr 40", Clasificacion = "Metales de Transiccion / Bloque D", Elements ="" },
@@ -71,9 +73,9 @@ namespace TablaPeriodica.Controllers
               new ElementosT { Name = "Sn 50", Clasificacion = "Otros Metales", Elements ="" },
               new ElementosT { Name = "Sb 51", Clasificacion = "Metaloides", Elements ="" },
               new ElementosT { Name = "Te 52", Clasificacion = "Metaloides", Elements ="" },
-              new ElementosT { Name = "I 53", Clasificacion = "Halogeno", Elements ="" },
+              new ElementosT { Name = "I 53", Clasificacion = "Halogenos", Elements ="" },
               new ElementosT { Name = "Xe 54", Clasificacion = "Gases Nobles", Elements ="" },
-              new ElementosT { Name = "Cs 55", Clasificacion = "Alcaloides", Elements ="" },
+              new ElementosT { Name = "Cs 55", Clasificacion = "Alcalinos", Elements ="" },
               new ElementosT { Name = "Ba 56", Clasificacion = "Alcalinoterreos", Elements ="" },
               new ElementosT { Name = "La-Lu 57-71", Clasificacion = "Lantanidos", Elements ="" },
               new ElementosT { Name = "Hf 72", Clasificacion = "Metales de Transiccion / Bloque D", Elements ="" },
@@ -91,7 +93,7 @@ namespace TablaPeriodica.Controllers
               new ElementosT { Name = "Po 84", Clasificacion = "Metaloides", Elements ="" },
               new ElementosT { Name = "At 85", Clasificacion = "Halogenos", Elements ="" },
               new ElementosT { Name = "Rn 86", Clasificacion = "Gases Nobles", Elements ="" },
-              new ElementosT { Name = "Fr 87", Clasificacion = "Alcaloides", Elements ="" },
+              new ElementosT { Name = "Fr 87", Clasificacion = "Alcalinos", Elements ="" },
               new ElementosT { Name = "Ra 88", Clasificacion = "Alcalinoterreos", Elements ="" },
               new ElementosT { Name = "Ac-Lr 89-103", Clasificacion = "Actinidos", Elements ="" },
               new ElementosT { Name = "Rf 104", Clasificacion = "Metales de Transiccion / Bloque D", Elements ="" },
@@ -103,10 +105,10 @@ namespace TablaPeriodica.Controllers
               new ElementosT { Name = "Ds 110", Clasificacion = "Metales de Transiccion / Bloque D", Elements ="" },
               new ElementosT { Name = "Rg 111", Clasificacion = "Metales de Transiccion / Bloque D", Elements ="" },
               new ElementosT { Name = "Cn 112", Clasificacion = "Metales de Transiccion / Bloque D", Elements ="" },
-              new ElementosT { Name = "Nh 113", Clasificacion = "Otros Elementos", Elements ="" },
-              new ElementosT { Name = "FI 114", Clasificacion = "Otros Elementos", Elements ="" },
-              new ElementosT { Name = "Mc 115", Clasificacion = "Otros Elementos", Elements ="" },
-              new ElementosT { Name = "Lv 116", Clasificacion = "Otros Elementos", Elements ="" },
+              new ElementosT { Name = "Nh 113", Clasificacion = "Otros Metales", Elements ="" },
+              new ElementosT { Name = "FI 114", Clasificacion = "Otros Metales", Elements ="" },
+              new ElementosT { Name = "Mc 115", Clasificacion = "Otros Metales", Elements ="" },
+              new ElementosT { Name = "Lv 116", Clasificacion = "Otros Metales", Elements ="" },
               new ElementosT { Name = "Ts 117", Clasificacion = "Halogenos", Elements ="" },
               new ElementosT { Name = "Og 118", Clasificacion = "Gases Nobles", Elements ="" },
               new ElementosT { Name = "La 57", Clasificacion = "Lantanidos", Elements ="" },
@@ -139,8 +141,8 @@ namespace TablaPeriodica.Controllers
               new ElementosT { Name = "Md 101", Clasificacion = "Actinidos", Elements ="" },
               new ElementosT { Name = "No 102", Clasificacion = "Actinidos", Elements ="" },
               new ElementosT { Name = "Lr 103", Clasificacion = "Actinidos", Elements ="" },
-              new ElementosT { Name = "Metales", Clasificacion = "", Elements ="" },
-              new ElementosT { Name = "Alcalinos", Clasificacion = "", Elements ="" },
+              //new ElementosT { Name = "Metales", Clasificacion = "", Elements ="" },
+             /* new ElementosT { Name = "Alcalinos", Clasificacion = "", Elements ="" },
               new ElementosT { Name = "Alcalinoterreos", Clasificacion = "", Elements ="" },
               new ElementosT { Name = "Metales de Transicion / Bloque D", Clasificacion = "", Elements ="" },
               new ElementosT { Name = "Lantanidos", Clasificacion = "", Elements ="" },
@@ -151,14 +153,11 @@ namespace TablaPeriodica.Controllers
               new ElementosT { Name = "Otros Metales", Clasificacion = "", Elements ="" },
               new ElementosT { Name = "Halogenos", Clasificacion = "", Elements ="" },
               new ElementosT { Name = "Gases Nobles", Clasificacion = "", Elements ="" },
-              new ElementosT { Name = "", Clasificacion = "", Elements ="" }
-
-
+              new ElementosT { Name = "", Clasificacion = "", Elements ="" }*/
             };
 
+            
 
-            ViewBag.Elementos = elementos;
-            return View();
-        }*/
+        }
     }
 }

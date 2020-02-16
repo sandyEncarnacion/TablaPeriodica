@@ -53,7 +53,7 @@ namespace TablaPeriodica
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Tabla}/{action=Index}/{id?}");
             });
         }
     }
